@@ -85,6 +85,9 @@ export default function AudioPlayer() {
     <div className="fixed bottom-6 left-6 z-50">
       <audio ref={audioRef} loop src={audioSource} preload="auto" autoPlay />
       
+      {/* Legacy iframe autoplay hack for certain browsers */}
+      <iframe src={audioSource} allow="autoplay" style={{ display: 'none' }} id="iframeAudio"></iframe>
+      
       <AnimatePresence>
         <motion.button
           initial={{ opacity: 0, scale: 0 }}
