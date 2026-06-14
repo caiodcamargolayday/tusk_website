@@ -7,20 +7,22 @@ import Image from "next/image";
 const events = [
   {
     id: "steak",
-    name: "STEAK NIGHT",
+    name: "STEAK AND FRITES",
     day: "Every Tuesday",
-    hours: "5 PM – 10 PM",
-    description: "Every Tuesday, enjoy our signature Steak & Frites night. Order a steak and receive your choice of a beer or a glass of wine — on us. The perfect midweek dinner in Uluwatu.",
+    hours: "5 PM to 10 PM",
+    description: "Every Tuesday, enjoy our signature Steak and Frites night. Order a steak and receive your choice of a beer or a glass of wine, on us. The perfect midweek dinner in Uluwatu.",
     imageUrl: "/menus/special_menus/1.jpg", 
   },
+  /* 
   {
     id: "ladies",
     name: "LADIES NIGHT",
     day: "Every Wednesday",
-    hours: "6 PM – 9 PM",
-    description: "Wednesday nights are dedicated to the ladies. Enjoy our special selection of 2-for-1 cocktails, because you and your friends deserve an elegant evening filled with quality drinks, delicious food, and great atmosphere.",
+    hours: "6 PM to 9 PM",
+    description: "Wednesday nights are dedicated to the ladies. Enjoy our special selection of 2 for 1 cocktails, because you and your friends deserve an elegant evening filled with quality drinks, delicious food, and great atmosphere.",
     imageUrl: "/menus/special_menus/TUSK - 1st Anniversary - J50.jpg",
   },
+  */
   {
     id: "jazz",
     name: "JAZZ NIGHT",
@@ -34,23 +36,23 @@ const events = [
     name: "LIVE DJ",
     day: "Every Saturday",
     hours: "From 8 PM",
-    description: "Every Saturday, our restaurant transforms into a vibrant late-night destination, welcoming renowned Bali DJs to set the mood while you enjoy great food, drinks, and even better company.",
+    description: "Every Saturday, our restaurant transforms into a vibrant late night destination, welcoming renowned Bali DJs to set the mood while you enjoy great food, drinks, and even better company.",
     imageUrl: "/menus/special_menus/TUSK - Ambience - J10.jpg",
   },
   {
     id: "sunday",
     name: "SUNDAY FREE FLOW BEER",
     day: "Every Sunday",
-    hours: "12 PM – 4 PM",
+    hours: "12 PM to 4 PM",
     description: "Order any item from our lunch menu (excluding sides, extras, and desserts) and enjoy access to our Free Flow Beer special. Ask our team about the beer of the day and make the most of your Sunday in Uluwatu.",
-    imageUrl: "/menus/special_menus/sunday_beer.png", 
+    imageUrl: "/free_flow_beer.png", 
   }
 ];
 
 export default function EventsSection() {
   const { openBooking } = useBooking();
   return (
-    <section id="events" className="bg-[var(--color-tusk-dark)] py-20 md:py-24">
+    <section id="events" className="bg-[var(--color-tusk-dark)] py-12 md:py-20">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -59,13 +61,13 @@ export default function EventsSection() {
         className="max-w-7xl mx-auto px-6 md:px-12 mb-16 md:mb-20 text-center"
       >
         <span className="font-sans font-medium tracking-[0.2em] uppercase text-[10px] md:text-sm mb-4 block opacity-80 text-[var(--color-tusk-beige)]">
-          Every Week at TUSK
+          Calendar
         </span>
         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-[var(--color-tusk-beige)] mb-4 md:mb-6">
-          Your Weekly Rituals
+          Weekly Schedule
         </h2>
         <p className="font-sans font-light text-base md:text-lg opacity-80 max-w-xl mx-auto text-[var(--color-tusk-beige)] px-4">
-          From Tuesday steaks to Friday jazz — every night at TUSK has a reason.
+          A curated lineup of dining experiences, live entertainment, and signature events designed to bring people together throughout the week.
         </p>
       </motion.div>
 

@@ -3,26 +3,27 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuModal from "./MenuModal";
+import { menuData } from "../data/menus";
 
-type MenuId = "lunch" | "dinner" | "libations";
+type MenuId = "lunch" | "dinner" | "beverages";
 
 const menus: { id: MenuId; label: string; description: string; imageUrl: string }[] = [
   {
     id: "lunch",
     label: "LUNCH",
-    description: "Our afternoon menu, served daily. Light, vibrant, and made for Uluwatu days.",
-    imageUrl: "https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=2070&auto=format&fit=crop", 
+    description: "Fresh, vibrant, and full of flavor. Our lunch menu combines carefully sourced ingredients with the signature touch of our open-fire kitchen.",
+    imageUrl: "/lunch_picture.jpg", 
   },
   {
     id: "dinner",
     label: "DINNER",
-    description: "An evening experience built around bold flavours, fresh ingredients, and the Uluwatu night.",
-    imageUrl: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1974&auto=format&fit=crop", 
+    description: "From perfectly grilled steaks to signature cocktails, our dinner experience celebrates the art of fire and flavor in the unmistakable atmosphere of Tusk.",
+    imageUrl: "/dinner_image.jpg", 
   },
   {
-    id: "libations",
-    label: "LIBATIONS",
-    description: "From hand-crafted cocktails to curated wines, refreshing sodas, and still waters — our drinks menu is designed to complement every moment.",
+    id: "beverages",
+    label: "BEVERAGES",
+    description: "From signature cocktails to carefully selected wines, our drinks menu is crafted to complement every moment at Tusk. Whether you're joining us for sunset, dinner, or a late-night drink, there's always something worth raising a glass to.",
     imageUrl: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop", 
   }
 ];
@@ -30,12 +31,13 @@ const menus: { id: MenuId; label: string; description: string; imageUrl: string 
 export default function MenusSection() {
   const [activeTab, setActiveTab] = useState<MenuId>(menus[0].id);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSectionTitle, setActiveSectionTitle] = useState<string | null>(null);
 
   const activeMenu = menus.find(m => m.id === activeTab)!;
 
   return (
     <>
-      <section id="menus" className="bg-[var(--color-tusk-green)] py-24 min-h-screen flex flex-col justify-center">
+      <section id="menus" className="bg-[var(--color-tusk-green)] py-12 md:py-20 min-h-screen flex flex-col justify-center">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -118,17 +120,44 @@ export default function MenusSection() {
                   >
                     {activeMenu.description}
                   </motion.p>
-                  <motion.button 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsModalOpen(true)}
-                    className="bg-[var(--color-tusk-red)] text-[var(--color-tusk-white)] px-8 py-4 uppercase text-sm tracking-widest font-medium hover:bg-white hover:text-[var(--color-tusk-dark)] transition-colors inline-block w-max"
-                  >
-                    View {activeMenu.label} Menu
-                  </motion.button>
+                  {activeMenu.id === "beverages" ? (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      className="flex flex-wrap gap-4"
+                    >
+                      {menuData.beverages.sections.map((section, idx) => (
+                        <motion.button
+                          key={idx}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            setActiveSectionTitle(section.title);
+                            setIsModalOpen(true);
+                          }}
+                          className="bg-transparent border border-[var(--color-tusk-beige)] text-[var(--color-tusk-beige)] px-6 py-3 uppercase text-sm tracking-widest font-medium hover:bg-[var(--color-tusk-beige)] hover:text-[var(--color-tusk-dark)] transition-colors"
+                        >
+                          {section.title}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  ) : (
+                    <motion.button 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        setActiveSectionTitle(null);
+                        setIsModalOpen(true);
+                      }}
+                      className="bg-[var(--color-tusk-red)] text-[var(--color-tusk-white)] px-8 py-4 uppercase text-sm tracking-widest font-medium hover:bg-white hover:text-[var(--color-tusk-dark)] transition-colors inline-block w-max"
+                    >
+                      View {activeMenu.label} Menu
+                    </motion.button>
+                  )}
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -140,6 +169,7 @@ export default function MenusSection() {
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         menuType={activeTab} 
+        sectionFilter={activeSectionTitle}
       />
     </>
   );

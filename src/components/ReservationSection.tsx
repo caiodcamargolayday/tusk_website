@@ -6,7 +6,7 @@ import { useBooking } from "@/context/BookingContext";
 export default function ReservationSection() {
   const { openBooking } = useBooking();
   return (
-    <section id="reserve" className="bg-[var(--color-tusk-green)] py-20 md:py-32 flex items-center justify-center px-4 sm:px-6 border-t border-[var(--color-tusk-beige)]/10">
+    <section id="reserve" className="bg-[var(--color-tusk-green)] py-12 md:py-20 flex items-center justify-center px-4 sm:px-6 border-t border-[var(--color-tusk-beige)]/10">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -18,7 +18,7 @@ export default function ReservationSection() {
           Reserve Your Table at TUSK
         </h2>
         <p className="font-sans font-light text-base md:text-xl opacity-80 max-w-xl mx-auto text-[var(--color-tusk-beige)] mb-10 md:mb-12 leading-relaxed px-2">
-          Whether it's a casual lunch, a weekly event, or a special evening — we'd love to have you.
+          Experience the flavors of our open-fire kitchen, handcrafted cocktails, and the warm atmosphere that makes Tusk one of Uluwatu's favorite dining destinations.
         </p>
         <motion.a 
           whileHover={{ scale: 1.05 }}

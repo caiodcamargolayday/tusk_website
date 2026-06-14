@@ -8,10 +8,11 @@ import { useBooking } from "@/context/BookingContext";
 interface MenuModalProps {
   isOpen: boolean;
   onClose: () => void;
-  menuType: "lunch" | "dinner" | "libations" | "specials";
+  menuType: "lunch" | "dinner" | "beverages" | "specials";
+  sectionFilter?: string | null;
 }
 
-export default function MenuModal({ isOpen, onClose, menuType }: MenuModalProps) {
+export default function MenuModal({ isOpen, onClose, menuType, sectionFilter }: MenuModalProps) {
   const { openBooking } = useBooking();
   // Prevent scrolling on body when modal is open
   useEffect(() => {
@@ -66,7 +67,9 @@ export default function MenuModal({ isOpen, onClose, menuType }: MenuModalProps)
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar">
               <div className="max-w-3xl mx-auto space-y-16">
-                {data.sections.map((section, idx) => (
+                {data.sections
+                  .filter((section) => !sectionFilter || section.title === sectionFilter)
+                  .map((section, idx) => (
                   <div key={idx} className="space-y-8">
                     <div className="text-center border-b border-[var(--color-tusk-dark)]/20 pb-4 mb-8">
                       <h3 className="font-sans uppercase tracking-[0.2em] text-xl font-medium mb-2">{section.title}</h3>

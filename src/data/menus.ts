@@ -80,8 +80,8 @@ export const menuData = {
       }
     ]
   },
-  libations: {
-    title: "TUSK Libations",
+  beverages: {
+    title: "TUSK Beverages",
     subtitle: "Hand-crafted cocktails, curated wines, and refreshing drinks.",
     sections: [
       {
@@ -117,7 +117,7 @@ export const menuData = {
     ]
   },
   specials: {
-    title: "May Specials at TUSK",
+    title: "June Specials at TUSK",
     subtitle: "A curated selection of seasonal dishes and exclusive creations.",
     sections: [
       {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBooking } from "@/context/BookingContext";
@@ -21,9 +21,17 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Specials", href: "#specials" },
-    { name: "Menus", href: "#menus" },
-    { name: "Events", href: "#events" },
+    { 
+      name: "Home", 
+      href: "/",
+      dropdown: [
+        { name: "Menus", href: "/#menus" },
+        { name: "Specials", href: "/#june-specials" },
+        { name: "Events", href: "/#events" },
+      ]
+    },
+    { name: "About", href: "/about" },
+    { name: "Gallery", href: "/#gallery" },
   ];
 
   return (
@@ -47,13 +55,31 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-[var(--color-tusk-beige)] hover:text-[var(--color-tusk-white)] text-sm tracking-widest uppercase transition-colors"
-            >
-              {link.name}
-            </Link>
+            <div key={link.name} className="relative group">
+              <Link
+                href={link.href}
+                className="text-[var(--color-tusk-beige)] hover:text-[var(--color-tusk-white)] text-sm tracking-widest uppercase transition-colors flex items-center gap-1"
+              >
+                {link.name}
+                {link.dropdown && <ChevronDown size={14} className="opacity-70 group-hover:rotate-180 transition-transform" />}
+              </Link>
+              
+              {link.dropdown && (
+                <div className="absolute top-full left-0 pt-6 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300">
+                  <div className="bg-[var(--color-tusk-dark)] border border-[var(--color-tusk-beige)]/20 py-2 min-w-[160px] shadow-xl rounded-sm">
+                    {link.dropdown.map(dropLink => (
+                      <Link
+                        key={dropLink.name}
+                        href={dropLink.href}
+                        className="block px-4 py-3 text-[var(--color-tusk-beige)] hover:bg-[var(--color-tusk-beige)]/10 hover:text-[var(--color-tusk-white)] text-xs tracking-widest uppercase transition-colors"
+                      >
+                        {dropLink.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
           <a
             href="#" onClick={(e) => { e.preventDefault(); openBooking(); }}
@@ -82,14 +108,29 @@ export default function Navbar() {
             className="absolute top-full left-0 right-0 bg-[var(--color-tusk-dark)] border-t border-[var(--color-tusk-beige)]/20 py-6 px-6 flex flex-col gap-6 md:hidden shadow-xl"
           >
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-[var(--color-tusk-beige)] text-lg tracking-widest uppercase"
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="flex flex-col gap-4">
+                <Link
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-[var(--color-tusk-beige)] text-lg tracking-widest uppercase"
+                >
+                  {link.name}
+                </Link>
+                {link.dropdown && (
+                  <div className="flex flex-col gap-4 pl-4 border-l border-[var(--color-tusk-beige)]/20">
+                    {link.dropdown.map(dropLink => (
+                      <Link
+                        key={dropLink.name}
+                        href={dropLink.href}
+                        onClick={() => setIsOpen(false)}
+                        className="text-[var(--color-tusk-beige)]/70 hover:text-[var(--color-tusk-beige)] text-sm tracking-widest uppercase"
+                      >
+                        {dropLink.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <a
               href="#" onClick={(e) => { 
