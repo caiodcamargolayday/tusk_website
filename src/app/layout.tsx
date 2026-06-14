@@ -5,6 +5,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import AudioPlayer from "@/components/AudioPlayer";
 import { BookingProvider } from "@/context/BookingContext";
 import BookingModal from "@/components/BookingModal";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           <FloatingWhatsApp />
           <AudioPlayer />
           <BookingModal />
+          <Analytics />
         </BookingProvider>
       </body>
     </html>
