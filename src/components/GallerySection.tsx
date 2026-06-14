@@ -1,19 +1,45 @@
 import Image from "next/image";
-import fs from "fs";
-import path from "path";
 
 export default function GallerySection() {
-  const galleryDir = path.join(process.cwd(), "public/gallery_section");
-  let images: string[] = [];
-  
-  try {
-    const files = fs.readdirSync(galleryDir);
-    images = files
-      .filter(file => file.match(/\.(jpg|jpeg|png|gif)$/i))
-      .map(file => `/gallery_section/${file}`);
-  } catch (err) {
-    console.error("Could not load gallery images:", err);
-  }
+  const images: string[] = [
+    "/gallery_section/Copy of 1.png",
+    "/gallery_section/Copy of Copy of Copy of Tusk - StandUp-72.jpg",
+    "/gallery_section/Copy of Copy of EST00335.jpg",
+    "/gallery_section/Copy of Copy of EST00432.jpg",
+    "/gallery_section/Copy of Copy of EST00606.jpg",
+    "/gallery_section/Copy of Copy of EST00694.jpg",
+    "/gallery_section/Copy of Copy of EST09950.jpg",
+    "/gallery_section/Copy of Copy of VSL08272.jpg",
+    "/gallery_section/Copy of Copy of VSL08285.jpg",
+    "/gallery_section/Copy of Copy of VSL08292.jpg",
+    "/gallery_section/Copy of Copy of VSL08309.jpg",
+    "/gallery_section/Copy of DSC06304.JPG",
+    "/gallery_section/Copy of DSC06306.JPG",
+    "/gallery_section/Copy of DSC06315.JPG",
+    "/gallery_section/Copy of DSC08662.JPG",
+    "/gallery_section/Copy of IMG_4118-Enhanced-NR.jpg",
+    "/gallery_section/Copy of IMG_4128-Enhanced-NR.jpg",
+    "/gallery_section/Copy of IMG_4131-Enhanced-NR.jpg",
+    "/gallery_section/Copy of TOM01374.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J1.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J11.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J27.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J34.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J4.jpg",
+    "/gallery_section/Copy of TUSK - 1st Anniversary - J46.jpg",
+    "/gallery_section/Copy of Tusk Grill - J13.jpg",
+    "/gallery_section/Copy of Tusk Grill - J14.jpg",
+    "/gallery_section/Copy of Tusk Grill - J23.jpg",
+    "/gallery_section/Copy of Tusk Grill - J24.jpg",
+    "/gallery_section/Copy of Tusk Grill - J25.jpg",
+    "/gallery_section/Copy of Tusk Grill - J27.jpg",
+    "/gallery_section/Copy of VSL08462.jpg",
+    "/gallery_section/Copy of VSL08465.jpg",
+    "/gallery_section/Copy of VSL08467.jpg",
+    "/gallery_section/drinks_image.JPG",
+    "/gallery_section/food_image.jpg",
+    "/gallery_section/the_interior_image.jpg"
+  ];
 
   return (
     <section id="gallery" className="bg-[var(--color-tusk-dark)] py-12 md:py-20 border-t border-[var(--color-tusk-beige)]/10">
